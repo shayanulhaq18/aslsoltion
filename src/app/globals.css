@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Fixed brand palette: the same in light and dark mode. */
+@theme {
+  --color-navy-950: #061227;
+  --color-navy-900: #0b1f3a;
+  --color-navy-800: #12294d;
+  --color-navy-700: #1a3766;
+  --color-navy-600: #24497f;
+  --color-amber-300: #f7d58c;
+  --color-amber-400: #f2bc4f;
+  --color-amber-500: #e6a12a;
+  --color-amber-600: #b97f12;
+  --color-ink: #0b1220; /* dark text on amber */
+  --color-snow: #f6f8fc; /* light text on navy */
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Semantic tokens: switch with the theme. */
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-brand: var(--brand);
+}
+
+:root {
+  --page: #f5f7fb;
+  --surface: #ffffff;
+  --subtle: #e9eef6;
+  --fg: #0f172a;
+  --fg-muted: #526077;
+  --line: rgb(15 23 42 / 0.1);
+  --accent: #b97f12;
+  --brand: #12294d;
+  color-scheme: light;
+}
+
+.dark {
+  --page: #070f1f;
+  --surface: #0e1a31;
+  --subtle: #0a1529;
+  --fg: #e7ecf4;
+  --fg-muted: #98a6bd;
+  --line: rgb(255 255 255 / 0.1);
+  --accent: #f2bc4f;
+  --brand: #1a3766;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--page);
+  color: var(--fg);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+::selection {
+  background: var(--color-amber-400);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+}
